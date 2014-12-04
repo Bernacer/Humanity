@@ -1,3 +1,8 @@
-<h2 ng-controller="MapsCtrl">Maps</h2>
- 
-{{ message }}
+<div ng-app="HumanityApp" ng-controller="MapsCtrl">
+    <div class="col-xs-12">
+        <div id="map"></div>
+        <div id="class" ng-repeat="marker in markers | orderBy : 'title'">
+            <!--<a href="#" ng-click="openInfoWindow($event, marker)">{{marker.title}}</a>-->
+        </div>
+    </div>
+</div>
