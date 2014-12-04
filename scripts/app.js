@@ -16,7 +16,7 @@ App.config(['$routeProvider',
         controller: 'NewsCtrl'
       }).
       otherwise({
-        redirectTo: '/AddNewOrder'
+        redirectTo: '/maps'
       });
 }]);
  
