@@ -14,6 +14,10 @@ App.config(['$routeProvider',
       when('/news', {
         templateUrl: 'views/news.html',
         controller: 'NewsCtrl'
+      })
+        . when('/dons', {
+        templateUrl: 'views/dons.html',
+        controller: 'MainCtrl'
       }).
        when('/news/:idNews', {
             templateUrl: 'views/newsDetail.html',
