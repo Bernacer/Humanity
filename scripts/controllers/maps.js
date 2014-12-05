@@ -1,39 +1,60 @@
 //Data
 var donnees = [
     {
-        city: 'Toronto',
-        desc: 'This is the best city in the world!',
-        lat: 43.7000,
-        long: -79.4000,
+        country : 'Guinée',
+        city: 'Guinée',
+        desc: 'Epidémie ebola',
+        lat: 10.7188,
+        long: -10.2716,
         type: 'epidemies'
     },
     {
-        city: 'New York',
-        desc: 'This city is aiiiiite!',
-        lat: 40.6700,
-        long: -73.9400,
+        country : 'Libérie',
+        city: 'Libérie',
+        desc: 'Epidémie ebola',
+        lat: 6.35,
+        long: -9.29,
+        type: 'epidemies'
+    },
+    {
+        country : 'Libérie',
+        city: 'Monrovia',
+        desc: 'Installation humanitaires anti-ebola',
+        lat: 6.3706582,
+        long: -10.7050870,
         type: 'instaHum'
     },
     {
-        city: 'Chicago',
-        desc: 'This is the second best city in the world!',
-        lat: 41.8819,
-        long: -87.6278,
+        country : 'Cameroun',
+        city: 'Yaoundé',
+        desc: 'Vaccin delivry',
+        lat: 3.8666670,
+        long: 11.5166670,
+        type: 'vaccins'
+    },
+    {
+        country : 'Nigéria',
+        city: 'Sokoto',
+        desc: 'International Help',
+        lat: 13.0666670,
+        long: 5.2333330,
+        type: 'vaccins'
+    },
+    {
+        country : 'Ouganda',
+        city: 'Kampala',
+        desc: 'International Help',
+        lat: 0.3136110,
+        long: 32.5811110,
+        type: 'vaccins'
+    },
+    {
+        country : 'Cameroun',
+        city: 'Douala',        
+        desc: 'ONG Installation',
+        lat: 4.0500000,
+        long: 9.7000000,
         type: 'instaHum'
-    },
-    {
-        city: 'Los Angeles',
-        desc: 'This city is live!',
-        lat: 34.0500,
-        long: -118.2500,
-        type: 'vaccins'
-    },
-    {
-        city: 'Las Vegas',
-        desc: 'Sin City...\'nuff said!',
-        lat: 36.0800,
-        long: -115.1522,
-        type: 'vaccins'
     }
 ];
 
@@ -61,24 +82,30 @@ angular.module('HumanityApp')
 
             var createMarker = function(info) {
 
-                if (info.type == "vaccins") {
-                    urlImage = "images/vaccins.png"
-                } else if (info.type == "epidemies"){
-                    urlImage = "images/epidemies.png"
-                }
-                else{
-                    urlImage = "images/instaHum.png"
-                }
+                urlImage = null;
                 var marker = new google.maps.Marker({
                     map: $scope.map,
                     position: new google.maps.LatLng(info.lat, info.long),
                     title: info.city,
-                    icon : urlImage
+                    country : info.country,
+                    icon: urlImage,
                 });
+                if (info.type == "vaccins") {
+                    marker.type = "vaccins";
+                    marker.icon = "images/vaccins.png";
+                } else if (info.type == "epidemies") {
+                    marker.type = "epidemies";
+                    marker.icon = "images/epidemies.png";
+                }
+                else {
+                    marker.type = "instaHum";
+                    marker.icon = "images/instaHum.png";
+                    ;
+                }
                 marker.content = '<div class="infoWindowContent">' + info.desc + '</div>';
 
                 google.maps.event.addListener(marker, 'click', function() {
-                    infoWindow.setContent('<h2>' + marker.title + '</h2>' + marker.content);
+                    infoWindow.setContent('<h3>' + marker.title + '</h3> <i> ' + marker.country + '<i>' + marker.content);
                     infoWindow.open($scope.map, marker);
                 });
 
@@ -97,15 +124,37 @@ angular.module('HumanityApp')
 
             $scope.change = function(type) {
 
+                if (type == "vaccins" && $scope.vaccinsCheck == false) {
+                    gestionMarqueurs($scope.markers, "vaccins", "suppression");
+                }
                 if (type == "vaccins" && $scope.vaccinsCheck == true) {
-                    alert("affiche les vaccins");
+                    gestionMarqueurs($scope.markers, "vaccins", "ajout");
                 }
 
+                if (type == "epidemies" && $scope.epidemiesCheck == false) {
+                    gestionMarqueurs($scope.markers, "epidemies", "suppression");
+                }
                 if (type == "epidemies" && $scope.epidemiesCheck == true) {
-                    alert("affiche les epidemies");
+                    gestionMarqueurs($scope.markers, "epidemies", "ajout");
+                }
+                if (type == "instaHum" && $scope.instaHumCheck == false) {
+                    gestionMarqueurs($scope.markers, "instaHum", "suppression");
                 }
                 if (type == "instaHum" && $scope.instaHumCheck == true) {
-                    alert("affiche les installations humanitaires");
+                    gestionMarqueurs($scope.markers, "instaHum", "ajout");
+                }
+            }
+
+            var gestionMarqueurs = function(marqueurs, marqueur, typeGestion) {
+                for (i = 0; i < marqueurs.length; i++) {
+                    if (marqueurs[i].type == marqueur) {
+                        if (typeGestion == "suppression") {
+                            marqueurs[i].setVisible(false);
+                        }
+                        else {
+                            marqueurs[i].setVisible(true);
+                        }
+                    }
                 }
             }
 
