@@ -2,7 +2,7 @@
  * Created by Nacer on 04/12/14.
  */
 angular.module('HumanityApp')
-    .controller('NewsCtrl', function($scope) {
+    .controller('NewsCtrl', function($scope,$routeParams) {
 
     $scope.message = 'This is Show news';
 
@@ -25,4 +25,9 @@ angular.module('HumanityApp')
         $('.navbar-collapse ul li a').click(function() {
             $('.navbar-toggle:visible').click();
         });
+
+
+        $scope.newsDetail = [
+
+        ]
 });

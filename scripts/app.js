@@ -15,6 +15,10 @@ App.config(['$routeProvider',
         templateUrl: 'views/news.html',
         controller: 'NewsCtrl'
       }).
+       when('/news/:idNews', {
+            templateUrl: 'views/newsDetail.html',
+            controller: 'NewsCtrl'
+        }).
       otherwise({
         redirectTo: '/maps'
       });
