@@ -1,11 +1,12 @@
 <div ng-app="HumanityApp" ng-controller="MapsCtrl">
     <div class="col-xs-12">
-        <div id="marqueurs">
-            <h3>Informations souhaitées </h3>
+        <div style="margin-top:20px" id="marqueurs" class="well">
+            <h3>Informations </h3>
             <ul class="list-inline">
-                <li> <input type="checkbox"  ng-model="vaccinsCheck" ng-change="change('vaccins')"/>  <label>Vaccins</label><br/></li>
-                <li><input type="checkbox" ng-model="epidemiesCheck" ng-change="change('epidemies')"/> <label>Epidémies</label><br/></li>
-                <li><input type="checkbox" ng-model="instaHumCheck" ng-change="change('instaHum')"/> <label>Installations Humanitaires</label><br/></li>
+                <li><input type="checkbox" ng-init="vaccinsCheck=true" ng-model="vaccinsCheck" ng-change="change('vaccins')"/>  <label>Vaccins</label><img src="images/vaccins.png"/></li>
+                <li><input type="checkbox" ng-init="epidemiesCheck=true" checked="checked" ng-model="epidemiesCheck" ng-change="change('epidemies')"/> <label>Epidémies</label><img src="images/epidemies.png"/></li>
+                <li><input type="checkbox" ng-init="instaHumCheck=true" checked="checked" ng-model="instaHumCheck" ng-change="change('instaHum')"/> <label>Installations Humanitaires</label><img src="images/instaHum.png"/></li>
+
             </ul>
         </div>
         <div id="map"></div>
