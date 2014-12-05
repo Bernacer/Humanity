@@ -1,5 +1,13 @@
 <div ng-app="HumanityApp" ng-controller="MapsCtrl">
     <div class="col-xs-12">
+        <div id="marqueurs">
+            <h3>Informations souhaitées </h3>
+            <ul>
+                <li> <input type="checkbox"  ng-model="vaccinsCheck" ng-change="change('vaccins')"/>  <label>Vaccins</label><br/></li>
+                <li><input type="checkbox" ng-model="epidemiesCheck" ng-change="change('epidemies')"/> <label>Epidémies</label><br/></li>
+                <li><input type="checkbox" ng-model="instaHumCheck" ng-change="change('instaHum')"/> <label>Installations Humanitaires</label><br/></li>
+            </ul>
+        </div>
         <div id="map"></div>
         <div id="class" ng-repeat="marker in markers | orderBy : 'title'">
             <!--<a href="#" ng-click="openInfoWindow($event, marker)">{{marker.title}}</a>-->
