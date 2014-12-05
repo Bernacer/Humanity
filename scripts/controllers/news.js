@@ -2,8 +2,17 @@
  * Created by Nacer on 04/12/14.
  */
 angular.module('HumanityApp')
-    .controller('NewsCtrl', function($scope,$routeParams) {
+    .controller('NewsCtrl', function($scope,$routeParams,$http) {
 
+        $http.get('http://localhost/wshumanity/webresources/users.users/allUser').
+            success(function(data, status, headers, config) {
+                $scope.news = data;
+            }).
+            error(function(data, status, headers, config) {
+                // called asynchronously if an error occurs
+                // or server returns response with an error status.
+            });
+        
     $scope.message = 'This is Show news';
 
         $(function() {
@@ -27,7 +36,4 @@ angular.module('HumanityApp')
         });
 
 
-        $scope.newsDetail = [
-
-        ]
 });
