@@ -61,20 +61,25 @@ angular.module('HumanityApp')
 
             var createMarker = function(info) {
 
-                if (info.type == "vaccins") {
-                    urlImage = "images/vaccins.png"
-                } else if (info.type == "epidemies"){
-                    urlImage = "images/epidemies.png"
-                }
-                else{
-                    urlImage = "images/instaHum.png"
-                }
+                urlImage = null;
                 var marker = new google.maps.Marker({
                     map: $scope.map,
                     position: new google.maps.LatLng(info.lat, info.long),
                     title: info.city,
-                    icon : urlImage
+                    icon: urlImage,
                 });
+                if (info.type == "vaccins") {
+                    marker.type = "vaccins";
+                    marker.icon = "images/vaccins.png";
+                } else if (info.type == "epidemies") {
+                    marker.type = "epidemies";
+                    marker.icon = "images/epidemies.png";
+                }
+                else {
+                    marker.type = "instaHum";
+                    marker.icon = "images/instaHum.png";
+                    ;
+                }
                 marker.content = '<div class="infoWindowContent">' + info.desc + '</div>';
 
                 google.maps.event.addListener(marker, 'click', function() {
@@ -97,15 +102,37 @@ angular.module('HumanityApp')
 
             $scope.change = function(type) {
 
+                if (type == "vaccins" && $scope.vaccinsCheck == false) {
+                    gestionMarqueurs($scope.markers, "vaccins", "suppression");
+                }
                 if (type == "vaccins" && $scope.vaccinsCheck == true) {
-                    alert("affiche les vaccins");
+                    gestionMarqueurs($scope.markers, "vaccins", "ajout");
                 }
 
+                if (type == "epidemies" && $scope.epidemiesCheck == false) {
+                    gestionMarqueurs($scope.markers, "epidemies", "suppression");
+                }
                 if (type == "epidemies" && $scope.epidemiesCheck == true) {
-                    alert("affiche les epidemies");
+                    gestionMarqueurs($scope.markers, "epidemies", "ajout");
+                }
+                if (type == "instaHum" && $scope.instaHumCheck == false) {
+                    gestionMarqueurs($scope.markers, "instaHum", "suppression");
                 }
                 if (type == "instaHum" && $scope.instaHumCheck == true) {
-                    alert("affiche les installations humanitaires");
+                    gestionMarqueurs($scope.markers, "instaHum", "ajout");
+                }
+            }
+
+            var gestionMarqueurs = function(marqueurs, marqueur, typeGestion) {
+                for (i = 0; i < marqueurs.length; i++) {
+                    if (marqueurs[i].type == marqueur) {
+                        if (typeGestion == "suppression") {
+                            marqueurs[i].setVisible(false);
+                        }
+                        else {
+                            marqueurs[i].setVisible(true);
+                        }
+                    }
                 }
             }
 
