@@ -1,24 +1,27 @@
 //Data
 var donnees = [
     {
-        city: 'Toronto',
-        desc: 'This is the best city in the world!',
-        lat: 43.7000,
-        long: -79.4000,
+        country : 'Guinée',
+        city: 'Guinée',
+        desc: 'Epidémie ebola',
+        lat: 10.7188,
+        long: -10.2716,
         type: 'epidemies'
     },
     {
-        city: 'New York',
-        desc: 'This city is aiiiiite!',
-        lat: 40.6700,
-        long: -73.9400,
-        type: 'instaHum'
+        country : 'Libérie',
+        city: 'Libérie',
+        desc: 'Epidémie ebola',
+        lat: 6.35,
+        long: -9.29,
+        type: 'epidemies'
     },
     {
-        city: 'Chicago',
-        desc: 'This is the second best city in the world!',
-        lat: 41.8819,
-        long: -87.6278,
+        country : 'Libérie',
+        city: 'Monrovia',
+        desc: 'Installation humanitaires anti-ebola',
+        lat: 6.3706582,
+        long: -10.7050870,
         type: 'instaHum'
     },
     {
@@ -66,6 +69,7 @@ angular.module('HumanityApp')
                     map: $scope.map,
                     position: new google.maps.LatLng(info.lat, info.long),
                     title: info.city,
+                    country : info.country,
                     icon: urlImage,
                 });
                 if (info.type == "vaccins") {
@@ -83,7 +87,7 @@ angular.module('HumanityApp')
                 marker.content = '<div class="infoWindowContent">' + info.desc + '</div>';
 
                 google.maps.event.addListener(marker, 'click', function() {
-                    infoWindow.setContent('<h2>' + marker.title + '</h2>' + marker.content);
+                    infoWindow.setContent('<h3>' + marker.title + '</h3> <i> ' + marker.country + '<i>' + marker.content);
                     infoWindow.open($scope.map, marker);
                 });
 
