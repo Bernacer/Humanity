@@ -25,18 +25,36 @@ var donnees = [
         type: 'instaHum'
     },
     {
-        city: 'Los Angeles',
-        desc: 'This city is live!',
-        lat: 34.0500,
-        long: -118.2500,
+        country : 'Cameroun',
+        city: 'Yaoundé',
+        desc: 'Vaccin delivry',
+        lat: 3.8666670,
+        long: 11.5166670,
         type: 'vaccins'
     },
     {
-        city: 'Las Vegas',
-        desc: 'Sin City...\'nuff said!',
-        lat: 36.0800,
-        long: -115.1522,
+        country : 'Nigéria',
+        city: 'Sokoto',
+        desc: 'International Help',
+        lat: 13.0666670,
+        long: 5.2333330,
         type: 'vaccins'
+    },
+    {
+        country : 'Ouganda',
+        city: 'Kampala',
+        desc: 'International Help',
+        lat: 0.3136110,
+        long: 32.5811110,
+        type: 'vaccins'
+    },
+    {
+        country : 'Cameroun',
+        city: 'Douala',        
+        desc: 'ONG Installation',
+        lat: 4.0500000,
+        long: 9.7000000,
+        type: 'instaHum'
     }
 ];
 
